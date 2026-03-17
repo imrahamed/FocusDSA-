@@ -127,6 +127,9 @@ export interface Topic {
     | "linkedlist"
     | "heap";
   usefulLinks?: { title: string; url: string }[];
+  usage?: string;
+  dsInvolved?: string;
+  sampleProblems?: string[];
 }
 
 export const TOPICS: Topic[] = [
@@ -765,6 +768,9 @@ export const TOPICS: Topic[] = [
       },
     ],
     visualizationType: "array",
+    usage: "Used when you need to store and retrieve data efficiently, count frequencies, or find pairs matching a condition.",
+    dsInvolved: "Array, HashTable, HashSet",
+    sampleProblems: ["Two Sum", "Contains Duplicate", "Top K Frequent Elements", "Longest Consecutive Sequence", "Group Anagrams"],
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -1191,6 +1197,9 @@ export const TOPICS: Topic[] = [
       },
     ],
     visualizationType: "array",
+    usage: "Used when searching for pairs in a sorted array, finding a subarray that meets a condition, or reversing elements.",
+    dsInvolved: "Array, String",
+    sampleProblems: ["Container With Most Water", "3Sum", "Trapping Rain Water", "Valid Palindrome"],
   },
 
   // ─────────────────────────────────────────────────────────────────────────────
@@ -1739,6 +1748,9 @@ export const TOPICS: Topic[] = [
       },
     ],
     visualizationType: "array",
+    usage: "This algorithmic technique is used when we need to handle the input data in a specific window size.",
+    dsInvolved: "Array, String, HashTable",
+    sampleProblems: ["Longest Substring with 'K' Distinct Characters", "Fruits into Baskets"],
   },
 
   {
@@ -1898,6 +1910,9 @@ export const TOPICS: Topic[] = [
       '"Reverse Linked List in-place is the first test of pointer manipulation comfort." — Facebook',
     ],
     visualizationType: "linkedlist",
+    usage: "Used when you need frequent insertions and deletions, or when memory allocation needs to be dynamic.",
+    dsInvolved: "Linked List, Pointers",
+    sampleProblems: ["Reverse Linked List", "Merge Two Sorted Lists", "Linked List Cycle"],
   },
 
   {
@@ -2039,6 +2054,9 @@ export const TOPICS: Topic[] = [
       '"Sliding Window Maximum (deque) separates good from great candidates." — Google',
     ],
     visualizationType: "array",
+    usage: "Used for tracking state in LIFO (stacks) or FIFO (queues) order. Useful for parenthesis matching, monotonic sequences, or level-order processing.",
+    dsInvolved: "Stack, Queue, Deque, Array",
+    sampleProblems: ["Valid Parentheses", "Min Stack", "Implement Queue using Stacks"],
   },
 
   {
@@ -2217,6 +2235,9 @@ export const TOPICS: Topic[] = [
       '"Serialize/Deserialize Binary Tree is our favorite system design + coding hybrid." — Amazon',
     ],
     visualizationType: "tree",
+    usage: "Used to model hierarchical data, enable fast lookups (BST), and perform recursive depth/breadth first traversals.",
+    dsInvolved: "Binary Tree, Binary Search Tree, Recursion",
+    sampleProblems: ["Maximum Depth of Binary Tree", "Invert Binary Tree", "Lowest Common Ancestor"],
   },
 
   {
@@ -2366,6 +2387,9 @@ export const TOPICS: Topic[] = [
       '"Merge K Sorted Lists shows if you understand priority queues deeply." — Google',
     ],
     visualizationType: "heap",
+    usage: "Used to repeatedly find the minimum or maximum element efficiently, or to keep track of the top K elements.",
+    dsInvolved: "Min-Heap, Max-Heap, Priority Queue",
+    sampleProblems: ["Kth Largest Element in an Array", "Merge K Sorted Lists", "Find Median from Data Stream"],
   },
 
   {
@@ -2530,6 +2554,9 @@ export const TOPICS: Topic[] = [
       '"Word Ladder BFS is our favorite because it tests if you can model the problem correctly." — Google',
     ],
     visualizationType: "graph",
+    usage: "Used to explore relationships, find connected components, or traverse networks using depth-first or breadth-first search.",
+    dsInvolved: "Graph, Matrix, Queue, Recursion",
+    sampleProblems: ["Number of Islands", "Clone Graph", "Course Schedule"],
   },
 
   {
@@ -2691,6 +2718,9 @@ export const TOPICS: Topic[] = [
     ],
     faangQuotes: ['"Dijkstra tests heap mastery AND graph modeling." — Meta'],
     visualizationType: "graph",
+    usage: "Used to find the shortest path between nodes in a graph, with or without weighted edges.",
+    dsInvolved: "Graph, Priority Queue, Heap",
+    sampleProblems: ["Network Delay Time", "Cheapest Flights Within K Stops", "Path With Minimum Effort"],
   },
 
   {
@@ -2855,6 +2885,9 @@ export const TOPICS: Topic[] = [
     ],
     faangQuotes: ['"Custom sort comparators show mastery." — Apple'],
     visualizationType: "sorting",
+    usage: "Used to order elements for faster searching or grouping, using custom comparators or specific algorithms.",
+    dsInvolved: "Array",
+    sampleProblems: ["Sort Colors", "Merge Intervals", "Largest Number"],
   },
 
   {
@@ -3027,6 +3060,9 @@ export const TOPICS: Topic[] = [
       '"Median of Two Sorted Arrays requires thinking in partitions." — Google',
     ],
     visualizationType: "array",
+    usage: "Used to efficiently search in sorted or monotonically changing search spaces by halving the search area.",
+    dsInvolved: "Array",
+    sampleProblems: ["Search in Rotated Sorted Array", "Find Minimum in Rotated Sorted Array", "Binary Search"],
   },
 
   {
@@ -3167,6 +3203,9 @@ export const TOPICS: Topic[] = [
       '"Jump Game II requires proving why the greedy choice is safe." — Airbnb',
     ],
     visualizationType: "array",
+    usage: "Used for optimization problems where making the locally optimal choice leads to a global optimum.",
+    dsInvolved: "Array",
+    sampleProblems: ["Jump Game", "Task Scheduler", "Gas Station"],
   },
 
   {
@@ -3343,6 +3382,9 @@ export const TOPICS: Topic[] = [
       '"N-Queens is our favorite backtracking — spatial reasoning test." — Google',
     ],
     visualizationType: "array",
+    usage: "Used to explore all potential combinations or permutations, backtracking when a path fails.",
+    dsInvolved: "Recursion, Array, String",
+    sampleProblems: ["Subsets", "Permutations", "Combination Sum"],
   },
 
   {
@@ -3624,6 +3666,9 @@ export const TOPICS: Topic[] = [
       '"Edit Distance — if you solve it in 10 min you\'re hired." — Meta',
     ],
     visualizationType: "dp",
+    usage: "Used to solve optimization problems by breaking them down into simpler overlapping subproblems and caching results.",
+    dsInvolved: "Array, Matrix, Hash Map",
+    sampleProblems: ["Climbing Stairs", "House Robber", "Longest Common Subsequence"],
   },
 
   {
@@ -3756,6 +3801,9 @@ export const TOPICS: Topic[] = [
       '"Counting Bits with DP + bit tricks is beautiful." — Google',
     ],
     visualizationType: "array",
+    usage: "Used for low-level optimizations and solving specific math or array problems using bitwise operators.",
+    dsInvolved: "Integer, Bitwise Operators",
+    sampleProblems: ["Single Number", "Number of 1 Bits", "Counting Bits"],
   },
 
   {
@@ -3942,6 +3990,9 @@ export const TOPICS: Topic[] = [
       '"Word Search II combining Trie+DFS is our staff-level problem." — Google',
     ],
     visualizationType: "trie",
+    usage: "Used for fast retrieval of strings and prefixes, making it ideal for autocomplete or dictionary searches.",
+    dsInvolved: "Trie Node, Hash Map, String",
+    sampleProblems: ["Implement Trie (Prefix Tree)", "Design Add and Search Words Data Structure", "Word Search II"],
   },
 
   {
@@ -4072,6 +4123,9 @@ export const TOPICS: Topic[] = [
       '"Kruskal MST using Union-Find is elegant and efficient." — Amazon',
     ],
     visualizationType: "graph",
+    usage: "Used to manage disjoint sets and efficiently determine if two elements are in the same set or merge sets.",
+    dsInvolved: "Array, Graph",
+    sampleProblems: ["Number of Provinces", "Redundant Connection", "Accounts Merge"],
   },
 
   {
@@ -4260,6 +4314,9 @@ export const TOPICS: Topic[] = [
       '"Segment tree with lazy propagation separates senior from staff engineers." — Google',
     ],
     visualizationType: "tree",
+    usage: "Used to perform efficient range queries and point/range updates over an array.",
+    dsInvolved: "Segment Tree, Binary Indexed Tree (Fenwick), Array",
+    sampleProblems: ["Range Sum Query - Mutable", "Count of Smaller Numbers After Self"],
   },
 ];
 
