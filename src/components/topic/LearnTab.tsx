@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Clock, Lightbulb, Zap, Download } from "lucide-react";
 import type { Topic } from "../../data/topicsData";
+import VisualizationPlayer from "../VisualizationPlayer";
 
 interface LearnTabProps {
   topic: Topic;
@@ -16,37 +17,40 @@ export default function LearnTab({ topic, downloadCheatSheet }: LearnTabProps) {
       className="space-y-6 mt-6"
     >
       {/* ── ADVANCED LEARNING HEADER (Inspired by reference image) ── */}
-      <div className="glass rounded-xl p-6 border border-white/5">
-        <h2 className="text-2xl font-display font-bold text-white mb-4 text-center">
+      <div className="glass rounded-xl p-6 border border-white/5 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ background: `linear-gradient(135deg, ${topic.color}, transparent)` }} />
+        <h2 className="text-2xl font-display font-bold text-white mb-4 text-center relative z-10">
           {topic.title}
         </h2>
 
         {topic.usage && (
-          <div className="mb-4">
-            <span className="font-bold text-lg text-amber-200">Usage: </span>
-            <span className="text-slate-300 text-lg">{topic.usage}</span>
+          <div className="mb-4 relative z-10 bg-white/5 p-4 rounded-lg border border-white/5">
+            <span className="font-bold text-lg text-amber-200 block mb-1">Use cases</span>
+            <span className="text-slate-300 text-base">{topic.usage}</span>
           </div>
         )}
 
         {topic.dsInvolved && (
-          <div className="mb-6">
-            <span className="font-bold text-lg text-amber-200">
-              DS Involved:{" "}
+          <div className="mb-6 relative z-10 bg-white/5 p-4 rounded-lg border border-white/5">
+            <span className="font-bold text-lg text-ocean-200 block mb-1">
+              Data Structures Involved
             </span>
-            <span className="text-slate-300 text-lg">{topic.dsInvolved}</span>
+            <span className="text-slate-300 text-base">{topic.dsInvolved}</span>
           </div>
         )}
 
         {topic.sampleProblems && topic.sampleProblems.length > 0 && (
-          <div>
-            <span className="font-bold text-lg text-amber-200 block mb-2">
-              Sample Problems:
+          <div className="relative z-10">
+            <span className="font-bold text-lg text-jade-200 block mb-2">
+              Classic Problems to Solve:
             </span>
-            <ul className="list-disc list-inside text-slate-300 text-lg space-y-1">
+            <div className="flex flex-wrap gap-2">
               {topic.sampleProblems.map((problem, i) => (
-                <li key={i}>{problem}</li>
+                <span key={i} className="px-3 py-1 bg-jade-500/10 border border-jade-500/20 text-jade-300 rounded-full text-sm">
+                  {problem}
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
         )}
       </div>
@@ -59,12 +63,16 @@ export default function LearnTab({ topic, downloadCheatSheet }: LearnTabProps) {
             Layman's Explanation
           </h3>
         </div>
+        <div className="bg-ocean-500/10 border border-ocean-500/20 rounded-lg p-4 mb-6 relative">
+          <div className="absolute -left-1 top-4 bottom-4 w-1 bg-ocean-500 rounded-r" />
+          <p className="text-ocean-100 leading-relaxed text-lg font-medium">{topic.layman}</p>
+        </div>
         {topic.visualizationType && (
-          <div className="mb-4 rounded-lg overflow-hidden border border-white/10 flex items-center justify-center bg-white/5 h-48">
-             <span className="text-slate-500 font-mono text-sm uppercase tracking-widest">{topic.visualizationType} visualization</span>
+          <div className="mb-4">
+             <h4 className="font-display font-semibold text-white mb-3 text-sm tracking-wider uppercase opacity-70">Interactive Visualization</h4>
+             <VisualizationPlayer topic={topic} />
           </div>
         )}
-        <p className="text-slate-300 leading-relaxed text-lg">{topic.layman}</p>
       </div>
 
       <div className="glass rounded-xl p-6 border border-white/5">

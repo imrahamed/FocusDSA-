@@ -207,9 +207,19 @@ export default function PracticeTab({ topic }: PracticeTabProps) {
                                     JavaScript Solution
                                   </div>
                                   <pre className="text-sm text-slate-300 whitespace-pre-wrap">
-                                    {(q.solution?.js)}
+                                    {q.solution?.js || "Solution coming soon..."}
                                   </pre>
                                 </div>
+                                {q.solution?.python && (
+                                  <div className="code-block">
+                                    <div className="text-[10px] text-slate-500 mb-2 uppercase tracking-wider">
+                                      Python Solution
+                                    </div>
+                                    <pre className="text-sm text-slate-300 whitespace-pre-wrap">
+                                      {q.solution.python}
+                                    </pre>
+                                  </div>
+                                )}
                                 <div className="flex gap-4 text-xs">
                                   <span className="text-slate-500">
                                     Time:{" "}
