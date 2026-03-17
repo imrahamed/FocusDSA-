@@ -238,14 +238,14 @@ export default function MockInterview() {
           <div className="glass rounded-xl p-6 border border-white/5 mb-5">
             <h2 className="font-display text-xl font-bold text-white mb-3">{curQ.title}</h2>
             <p className="text-slate-300 text-sm leading-relaxed mb-4">{curQ.description}</p>
-            {curQ.examples.map((ex: { input: string; output: string }, i: number) => (
+            {((curQ.examples || []) || []).map((ex: { input: string; output: string }, i: number) => (
               <div key={i} className="code-block mb-2 text-xs">
                 <div><span className="text-slate-500">Input: </span><span className="text-ocean-300">{ex.input}</span></div>
                 <div><span className="text-slate-500">Output: </span><span className="text-jade-300">{ex.output}</span></div>
               </div>
             ))}
             <div className="flex flex-wrap gap-1.5 mt-3">
-              {curQ.constraints.map((c: string, i: number) => <span key={i} className="text-[10px] text-slate-600 bg-white/5 rounded px-2 py-0.5 font-mono">{c}</span>)}
+              {((curQ.constraints || []) || []).map((c: string, i: number) => <span key={i} className="text-[10px] text-slate-600 bg-white/5 rounded px-2 py-0.5 font-mono">{c}</span>)}
             </div>
           </div>
 

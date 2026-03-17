@@ -93,7 +93,7 @@ export default function PracticeTab({ topic }: PracticeTabProps) {
                         <span>•</span>
                         <span>{q.timeComplexity}</span>
                         <span>•</span>
-                        <span>{q.tags.join(", ")}</span>
+                        <span>{(q.tags || []).join(", ")}</span>
                       </div>
                     </div>
                     {isSolved(q.id) && (
@@ -120,7 +120,7 @@ export default function PracticeTab({ topic }: PracticeTabProps) {
                               {q.description}
                             </p>
                             <div className="mt-3 space-y-2">
-                              {q.examples.map((ex, i) => (
+                              {((q.examples || []) || []).map((ex, i) => (
                                 <div key={i} className="code-block text-xs">
                                   <div>
                                     <span className="text-slate-500">Input: </span>
@@ -139,7 +139,7 @@ export default function PracticeTab({ topic }: PracticeTabProps) {
                               ))}
                             </div>
                             <div className="mt-3 flex flex-wrap gap-1.5">
-                              {q.constraints.map((c, i) => (
+                              {((q.constraints || []) || []).map((c, i) => (
                                 <span
                                   key={i}
                                   className="text-[10px] text-slate-600 bg-white/5 rounded px-2 py-0.5 font-mono"
@@ -151,7 +151,7 @@ export default function PracticeTab({ topic }: PracticeTabProps) {
                           </div>
 
                           <div className="space-y-1">
-                            {q.hints.map((hint, i) => (
+                            {(q.hints || []).map((hint, i) => (
                               <div
                                 key={i}
                                 className="text-xs text-slate-500 flex items-start gap-2"
@@ -207,7 +207,7 @@ export default function PracticeTab({ topic }: PracticeTabProps) {
                                     JavaScript Solution
                                   </div>
                                   <pre className="text-sm text-slate-300 whitespace-pre-wrap">
-                                    {q.solution.js}
+                                    {(q.solution?.js)}
                                   </pre>
                                 </div>
                                 <div className="flex gap-4 text-xs">

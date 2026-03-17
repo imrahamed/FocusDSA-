@@ -10,7 +10,7 @@ interface Props { question: Question; onSolve?: (timeTakenMs: number) => void }
 
 export default function CodeEditor({ question, onSolve }: Props) {
   const [language, setLanguage] = useState<'javascript' | 'python'>('javascript')
-  const [code, setCode] = useState(question.starterCode.js)
+  const [code, setCode] = useState((question.starterCode || { js: "", python: "" }).js)
   const [results, setResults] = useState<TestResult[]>([])
   const [running, setRunning] = useState(false)
   const [allPassed, setAllPassed] = useState(false)
@@ -21,7 +21,7 @@ export default function CodeEditor({ question, onSolve }: Props) {
     setResults([])
     await new Promise((r) => setTimeout(r, 400))
     const testResults: TestResult[] = []
-    for (const tc of question.testCases.filter((t: { hidden?: boolean }) => !t.hidden)) {
+    for (const tc of (question.testCases || []).filter((t: { hidden?: boolean }) => !t.hidden)) {
       try {
         let actual = ''
         if (language === 'javascript') {
@@ -49,13 +49,13 @@ export default function CodeEditor({ question, onSolve }: Props) {
   }
 
   const resetCode = () => {
-    setCode(language === 'javascript' ? question.starterCode.js : question.starterCode.python)
+    setCode(language === 'javascript' ? (question.starterCode || { js: "", python: "" }).js : (question.starterCode || { js: "", python: "" }).python)
     setResults([]); setAllPassed(false); startTime.current = Date.now()
   }
 
   const switchLang = (lang: 'javascript' | 'python') => {
     setLanguage(lang)
-    setCode(lang === 'javascript' ? question.starterCode.js : question.starterCode.python)
+    setCode(lang === 'javascript' ? (question.starterCode || { js: "", python: "" }).js : (question.starterCode || { js: "", python: "" }).python)
     setResults([])
   }
 

@@ -194,12 +194,12 @@ export default function LearnTab({ topic, downloadCheatSheet }: LearnTabProps) {
             {topic.usefulLinks.map((link, i) => (
               <li key={i}>
                 <a
-                  href={link.url}
+                  href={(link as any).url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-ocean-400 hover:text-ocean-300 underline text-base"
                 >
-                  {link.title}
+                  {(link as any).title}
                 </a>
               </li>
             ))}
