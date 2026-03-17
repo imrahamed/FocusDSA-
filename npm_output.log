@@ -1,0 +1,11 @@
+
+> focus-dsa-academy@1.0.0 dev
+> vite
+
+
+  VITE v5.4.21  ready in 304 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+3:24:52 AM [vite] hmr update /src/App.tsx, /src/index.css, /src/components/Layout.tsx, /src/components/topic/TopicPage.tsx, /src/components/ProgressDashboard.tsx, /src/interview/MockInterview.tsx
+3:25:14 AM [vite] hmr update /src/components/topic/LearnTab.tsx, /src/index.css

@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
 import Dashboard from './components/ProgressDashboard'
-import TopicPage from './components/TopicPage'
+import TopicPage from './components/topic/TopicPage'
 import MockInterview from './interview/MockInterview'
 import { TOPICS } from './data/topicsData'
 
