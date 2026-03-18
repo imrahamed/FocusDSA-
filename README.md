@@ -1,6 +1,6 @@
 # ⚡ FocusDSA Academy — 2026 Edition
 
-> Advanced Algorithms & Data Structures Mastery Lab — Stop doom-scrolling, start mastering DSA.
+> Advanced Algorithms & Data Structures Mastery Lab — Anti doom-scrolling, start mastering DSA.
 
 ## 🚀 Quick Start
 
