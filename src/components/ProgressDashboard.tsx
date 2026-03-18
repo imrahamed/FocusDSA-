@@ -5,12 +5,10 @@ import { motion } from 'framer-motion'
 import { useDSAStore } from '../store/useDSAStore'
 import { TOPICS } from '../data/topicsData'
 import type { DailySession, SolvedQuestion } from '../store/useDSAStore'
-import PomodoroTimer from './PomodoroTimer'
-import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
-import { Flame, Trophy, Clock, TrendingUp, Zap, BookOpen, Calendar, Star } from 'lucide-react'
+import { Flame, Trophy, Zap, BookOpen, Calendar, Star, Play } from 'lucide-react'
 
 export default function ProgressDashboard() {
-  const { streak, solvedQuestions, totalFocusMinutesToday, topicProgress, sessionsHistory } = useDSAStore()
+  const { streak, solvedQuestions, topicProgress, sessionsHistory } = useDSAStore()
 
   const totalSolved = solvedQuestions.length
   const totalQuestions = TOPICS.reduce((a: number, t) => a + t.questions.length, 0)
@@ -20,29 +18,26 @@ export default function ProgressDashboard() {
   const potdTopic = TOPICS[dayOfYear % TOPICS.length]
   const potdQuestion = potdTopic.questions[dayOfYear % potdTopic.questions.length]
 
-  const last7 = Array.from({ length: 7 }, (_: unknown, i: number) => {
-    const d = new Date(Date.now() - (6 - i) * 86400000)
-    const dateStr = d.toISOString().split('T')[0]
-    const session = sessionsHistory.find((s: DailySession) => s.date === dateStr)
-    return { day: d.toLocaleDateString('en', { weekday: 'short' }), minutes: session?.minutesFocused || 0 }
-  })
-
   const difficultyColors: Record<string, string> = {
     Easy: 'text-jade-400', Medium: 'text-amber-400', Hard: 'text-rose-400', Advanced: 'text-violet-400'
   }
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
-      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-        <h1 className="font-display text-3xl font-bold text-white">Welcome back <span className="grad-ocean">to the lab.</span></h1>
-        <p className="text-slate-500 mt-1.5 text-sm">Keep the streak alive. One problem at a time.</p>
+      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+        <div>
+          <h1 className="font-display text-3xl font-bold text-white">Welcome back <span className="grad-ocean">to the lab.</span></h1>
+          <p className="text-slate-500 mt-1.5 text-sm">Keep the streak alive. One problem at a time.</p>
+        </div>
+        <Link to="/anti-doom" className="flex items-center gap-2 px-6 py-2.5 bg-violet-500/20 hover:bg-violet-500/30 text-violet-300 rounded-xl font-display font-bold text-sm transition-all transform hover:scale-105 border border-violet-500/30 shadow-[0_0_15px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)]">
+          <Play size={16} fill="currentColor" /> Enter Anti-Doom Scroll
+        </Link>
       </motion.div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         {[
           { icon: <Flame className="text-amber-400" size={20} />, label: 'Day Streak', value: streak, sub: 'days', color: 'border-amber-500/20' },
           { icon: <Trophy className="text-jade-400" size={20} />, label: 'Solved', value: `${totalSolved}/${totalQuestions}`, sub: 'questions', color: 'border-jade-500/20' },
-          { icon: <Clock className="text-ocean-400" size={20} />, label: 'Today', value: `${totalFocusMinutesToday}m`, sub: 'focused', color: 'border-ocean-500/20' },
           { icon: <Star className="text-violet-400" size={20} />, label: 'Topics', value: `${completedTopics}/${TOPICS.length}`, sub: 'completed', color: 'border-violet-500/20' },
         ].map((stat, i: number) => (
           <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
@@ -52,33 +47,6 @@ export default function ProgressDashboard() {
             <div className="text-xs text-slate-600 mt-0.5">{stat.sub}</div>
           </motion.div>
         ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
-          className="lg:col-span-2 glass rounded-xl p-5 border border-white/5">
-          <div className="flex items-center gap-2 mb-4">
-            <TrendingUp size={16} className="text-ocean-400" />
-            <h3 className="font-display font-semibold text-white text-sm">Focus Minutes — Last 7 Days</h3>
-          </div>
-          <ResponsiveContainer width="100%" height={140}>
-            <AreaChart data={last7} margin={{ top: 5, right: 10, bottom: 0, left: -20 }}>
-              <defs>
-                <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <XAxis dataKey="day" tick={{ fill: '#475569', fontSize: 11 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: '#475569', fontSize: 11 }} axisLine={false} tickLine={false} />
-              <Tooltip contentStyle={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', fontSize: '12px', color: '#e2e8f0' }} />
-              <Area type="monotone" dataKey="minutes" stroke="#0ea5e9" fill="url(#grad)" strokeWidth={2} />
-            </AreaChart>
-          </ResponsiveContainer>
-        </motion.div>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}>
-          <PomodoroTimer />
-        </motion.div>
       </div>
 
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
