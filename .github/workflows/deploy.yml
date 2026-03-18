@@ -1,0 +1,25 @@
+name: Deploy to Surge
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies and Build
+        run: |
+          npm install
+          npm run build  # Skip this if your project is just static HTML
+
+      - name: Deploy to Surge
+        run: npx surge ./dist dsa.imrahamed.in --token ${{ secrets.SURGE_TOKEN }}
