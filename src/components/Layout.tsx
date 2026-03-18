@@ -4,8 +4,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDSAStore } from '../store/useDSAStore'
 import { TOPICS } from '../data/topicsData'
-import PomodoroTimer from './PomodoroTimer'
-import { LayoutDashboard, FlaskConical, ChevronLeft, Menu, Flame, Trophy } from 'lucide-react'
+import { LayoutDashboard, FlaskConical, ChevronLeft, Menu, Flame, Trophy, PlayCircle } from 'lucide-react'
 
 export default function Layout() {
   const location = useLocation()
@@ -50,6 +49,7 @@ export default function Layout() {
 
             <nav className="flex-1 overflow-y-auto px-3 pb-4">
               <NavItem to="/" icon={<LayoutDashboard size={15} />} label="Dashboard" active={location.pathname === '/'} />
+              <NavItem to="/anti-doom" icon={<PlayCircle size={15} />} label="Anti-Doom Scroll" active={location.pathname === '/anti-doom'} />
               <NavItem to="/interview" icon={<FlaskConical size={15} />} label="Mock Interview" active={location.pathname === '/interview'} />
               <div className="mt-4 mb-2 px-2 text-[10px] uppercase tracking-widest text-slate-600 font-display">
                 Topics ({TOPICS.length})
@@ -64,7 +64,6 @@ export default function Layout() {
                 />
               ))}
             </nav>
-            <PomodoroTimer compact />
           </motion.aside>
         )}
       </AnimatePresence>
@@ -77,7 +76,6 @@ export default function Layout() {
             </button>
           )}
           <div className="flex-1" />
-          {!sidebarOpen && <PomodoroTimer micro />}
           <div className="flex items-center gap-1.5 text-xs text-slate-500">
             <Flame size={13} className="text-amber-400" />
             <span>{streak}d</span>
